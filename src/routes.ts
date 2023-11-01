@@ -1,6 +1,6 @@
 import Elysia, { t } from "elysia";
-import { RegisterUserRequest, RegisterUserResponse } from "./dto/RegisterUser";
-import { LoginResponse } from "./dto/LoginUser";
+import { RegisterUserRequest, RegisterUserResponse } from "./auth/RegisterUser";
+import { LoginResponse } from "./auth/LoginUser";
 
 export const router = new Elysia()
   .get("/", () => {

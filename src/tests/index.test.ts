@@ -1,7 +1,10 @@
-import { LoginRequest, LoginResponse } from "./../dto/LoginUser";
+import { LoginRequest, LoginResponse } from "../auth/LoginUser";
 import { describe, expect, it } from "bun:test";
 import { app } from "../index";
-import { RegisterUserRequest, RegisterUserResponse } from "../dto/RegisterUser";
+import {
+  RegisterUserRequest,
+  RegisterUserResponse,
+} from "../auth/RegisterUser";
 
 describe("Authentication API e2e", () => {
   it("should salute", async () => {
