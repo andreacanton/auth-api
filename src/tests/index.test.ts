@@ -1,12 +1,18 @@
 import { LoginRequest, LoginResponse } from "../auth/LoginUser";
-import { describe, expect, it } from "bun:test";
-import { app } from "../index";
+import { beforeAll, describe, expect, it } from "bun:test";
+
 import {
   RegisterUserRequest,
   RegisterUserResponse,
 } from "../auth/RegisterUser";
+import { app } from "../index";
+import { migrate } from "drizzle-orm/bun-sqlite/migrator";
+import { memoryDb } from "../memoryDb";
 
 describe("Authentication API e2e", () => {
+  beforeAll(async () => {
+    migrate(memoryDb, { migrationsFolder: "./drizzle" });
+  });
   it("should salute", async () => {
     const expectedResponse = { message: "Authentication API" };
 

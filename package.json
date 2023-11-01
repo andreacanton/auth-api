@@ -2,7 +2,8 @@
   "name": "auth-api-bun",
   "version": "1.0.50",
   "scripts": {
-    "dev": "bun --watch run src/index.ts",
+    "start": "NODE_ENV=development && bun --watch run src/index.ts",
+    "twc": "NODE_ENV=test && bun test --watch --coverage",
     "db:migrate": "bun run src/migrate.ts",
     "db:seeds": "bun run src/seeds.ts"
   },

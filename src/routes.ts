@@ -1,20 +1,32 @@
+import { users } from "./schema";
 import Elysia, { t } from "elysia";
 import { RegisterUserRequest, RegisterUserResponse } from "./auth/RegisterUser";
 import { LoginResponse } from "./auth/LoginUser";
+import * as schema from "./schema";
+import { setup } from "./setup";
 
 export const router = new Elysia()
+  .use(setup)
   .get("/", () => {
     return { message: "Authentication API" };
   })
   .post(
     "/register",
-    ({ body }) => {
+    async ({ body, db }) => {
       const request = body as RegisterUserRequest;
-      const savedUser: RegisterUserResponse = {
-        userId: 1,
-        email: request.email,
-      };
-      return savedUser;
+      const passwordHash = await Bun.password.hash(request.password);
+      const savedUsers = await db
+        .insert(schema.users)
+        .values({
+          email: request.email,
+          passwordHash,
+        })
+        .returning();
+      const user = savedUsers[0];
+      return {
+        userId: user.userId,
+        email: user.email,
+      } as RegisterUserResponse;
     },
     {
       body: t.Object({
@@ -26,7 +38,7 @@ export const router = new Elysia()
   )
   .post(
     "/login",
-    ({ body }) => {
+    ({ body, db }) => {
       return {
         access: "aspidjfbpaiskdhjbfasd",
         refresh: "asdfasdfasdfasdfa",

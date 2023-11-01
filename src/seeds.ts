@@ -1,7 +1,7 @@
-import { db } from "./db";
+import { sqliteDb } from "./db";
 import * as schema from "./schema";
 
-await db.insert(schema.users).values([
+await sqliteDb.insert(schema.users).values([
   {
     email: "andreacanton@duck.com",
     passwordHash: Bun.password.hashSync("Password01!"),
