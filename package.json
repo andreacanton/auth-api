@@ -2,13 +2,17 @@
   "name": "auth-api-bun",
   "version": "1.0.50",
   "scripts": {
-    "dev": "bun --watch run src/index.ts"
+    "dev": "bun --watch run src/index.ts",
+    "db:migrate": "bun run src/migrate.ts",
+    "db:seeds": "bun run src/seeds.ts"
   },
   "dependencies": {
+    "drizzle-orm": "^0.28.6",
     "elysia": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "drizzle-kit": "^0.19.13"
   },
   "module": "src/index.js"
 }
