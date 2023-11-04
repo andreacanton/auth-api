@@ -3,7 +3,9 @@
 The pourpose of this is to practices bun.js
 
 ## Development
+
 To start the development server run:
+
 ```bash
 bun run dev
 ```
