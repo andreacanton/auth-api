@@ -1,10 +1,6 @@
-# Elysia with Bun runtime
+# Auth API
 
-## Getting Started
-To get started with this template, simply paste this command into your terminal:
-```bash
-bun create elysia ./elysia-example
-```
+The pourpose of this is to practices bun.js
 
 ## Development
 To start the development server run:

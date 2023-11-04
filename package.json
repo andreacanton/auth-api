@@ -1,6 +1,6 @@
 {
-  "name": "auth-api-bun",
-  "version": "1.0.50",
+  "name": "auth-api",
+  "version": "0.0.0",
   "scripts": {
     "start": "NODE_ENV=development && bun --watch run src/index.ts",
     "twc": "NODE_ENV=test && bun test --watch --coverage",
