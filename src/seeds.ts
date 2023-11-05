@@ -1,4 +1,4 @@
-import { sqliteDb } from "./db";
+import { sqliteDb } from "./database/db";
 import * as schema from "./schema";
 
 await sqliteDb.insert(schema.users).values([

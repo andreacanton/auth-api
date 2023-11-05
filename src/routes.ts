@@ -2,7 +2,7 @@ import Elysia, { t } from "elysia";
 import { RegisterUserRequest, RegisterUserResponse } from "./auth/RegisterUser";
 import { LoginResponse } from "./auth/LoginUser";
 import * as schema from "./schema";
-import { setup } from "./setup";
+import { setup } from "./database/setup";
 
 export const router = new Elysia()
   .use(setup)

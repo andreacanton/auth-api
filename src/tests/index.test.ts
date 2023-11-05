@@ -8,7 +8,7 @@ import {
 } from "../auth/RegisterUser";
 import { app } from "../index";
 import { migrate } from "drizzle-orm/bun-sqlite/migrator";
-import { memoryDb } from "../memoryDb";
+import { memoryDb } from "../database/memoryDb";
 
 describe("Authentication API e2e", () => {
   beforeAll(async () => {

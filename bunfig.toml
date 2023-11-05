@@ -1,0 +1,4 @@
+[test]
+coverage = true
+coverageIgnoreSourcemaps = true
+coverageSkipTestFiles = true
