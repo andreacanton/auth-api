@@ -1,5 +1,6 @@
 import { LoginRequest, LoginResponse } from "../auth/LoginUser";
 import { beforeAll, describe, expect, it } from "bun:test";
+import { faker } from "@faker-js/faker";
 
 import {
   RegisterUserRequest,
@@ -24,8 +25,8 @@ describe("Authentication API e2e", () => {
   });
   it("should register", async () => {
     const request: RegisterUserRequest = {
-      email: "email@test.com",
-      password: "Password!23",
+      email: faker.internet.email(),
+      password: faker.internet.password(),
     };
     const response: RegisterUserResponse = await app
       .handle(
@@ -40,8 +41,8 @@ describe("Authentication API e2e", () => {
   });
   it("should login", async () => {
     const request: LoginRequest = {
-      email: "email@test.com",
-      password: "Password!23",
+      email: faker.internet.email(),
+      password: faker.internet.password(),
     };
     const response: LoginResponse = await app
       .handle(
