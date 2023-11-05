@@ -1,4 +1,3 @@
-import { users } from "./schema";
 import Elysia, { t } from "elysia";
 import { RegisterUserRequest, RegisterUserResponse } from "./auth/RegisterUser";
 import { LoginResponse } from "./auth/LoginUser";
