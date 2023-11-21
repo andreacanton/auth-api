@@ -6,3 +6,12 @@ export const users = sqliteTable("users", {
   passwordHash: text("password_hash").notNull(),
   lastAccess: text("last_access"),
 });
+
+export const userSessions = sqliteTable("user_sessions", {
+  sessionId: text("session_id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.userId),
+  createdAt: text("created_at").notNull(),
+  expiresAt: text("expires_at"),
+});

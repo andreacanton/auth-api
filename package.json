@@ -3,16 +3,20 @@
   "version": "0.0.0",
   "scripts": {
     "start": "NODE_ENV=development && bun --watch run src/index.ts",
-    "twc": "NODE_ENV=test && bun test --watch --coverage",
+    "testwatch": "NODE_ENV=test && bun test --watch",
+    "migration:generate": "drizzle-kit generate:sqlite",
     "db:migrate": "bun run src/migrate.ts",
     "db:seeds": "bun run src/seeds.ts"
   },
   "dependencies": {
+    "date-fns": "^2.30.0",
     "drizzle-orm": "^0.28.6",
-    "elysia": "latest"
+    "elysia": "^0.7.29",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.2.0",
+    "@types/uuid": "^9.0.6",
     "bun-types": "latest",
     "drizzle-kit": "^0.19.13"
   },

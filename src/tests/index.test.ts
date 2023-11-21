@@ -1,5 +1,5 @@
 import { LoginRequest, LoginResponse } from "../auth/LoginUser";
-import { beforeAll, describe, expect, it } from "bun:test";
+import { beforeAll, describe, expect, it, test } from "bun:test";
 import { faker } from "@faker-js/faker";
 
 import {
@@ -23,36 +23,33 @@ describe("Authentication API e2e", () => {
 
     expect(response).toEqual(expectedResponse);
   });
-  it("should register", async () => {
-    const request: RegisterUserRequest = {
+  it("shoud register and login", async () => {
+    const testUser = {
       email: faker.internet.email(),
       password: faker.internet.password(),
     };
-    const response: RegisterUserResponse = await app
+    const registerRequest: RegisterUserRequest =
+      testUser as RegisterUserRequest;
+    const registerResponse: RegisterUserResponse = await app
       .handle(
         new Request("http://localhost:3000/register", {
           method: "POST",
-          body: JSON.stringify(request),
+          body: JSON.stringify(registerRequest),
         })
       )
       .then(async (res) => await res.json());
-    expect(response.email).toBe(request.email);
-    expect(response.userId).toBeNumber();
-  });
-  it("should login", async () => {
-    const request: LoginRequest = {
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-    };
-    const response: LoginResponse = await app
+    const loginRequest: LoginRequest = testUser as LoginRequest;
+    const loginResponse: LoginResponse = await app
       .handle(
         new Request("http://localhost:3000/login", {
           method: "POST",
-          body: JSON.stringify(request),
+          body: JSON.stringify(loginRequest),
         })
       )
       .then(async (res) => await res.json());
-    expect(response.access).toBeString();
-    expect(response.refresh).toBeString();
+    expect(registerResponse.email).toBe(registerRequest.email);
+    expect(registerResponse.userId).toBeNumber();
+    expect(loginResponse.access).toBeString();
+    expect(loginResponse.refresh).toBeString();
   });
 });
