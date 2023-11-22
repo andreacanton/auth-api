@@ -1,4 +1,3 @@
-import { LoginRequest } from './../auth/LoginUser';
 import { LoginRequest, LoginResponse } from "../auth/LoginUser";
 import { afterEach, beforeAll, describe, expect, it, test } from "bun:test";
 import { faker } from "@faker-js/faker";
