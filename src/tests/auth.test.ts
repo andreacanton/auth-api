@@ -49,10 +49,19 @@ describe("Authentication API e2e", () => {
         })
       )
       .then(async (res) => await res.json());
+    const meResponse = await app.handle(
+      new Request("http://localhost:3000/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${loginResponse.access}`
+        }
+      }));
+    
     expect(registerResponse.email).toBe(registerRequest.email);
     expect(registerResponse.userId).toBeNumber();
     expect(loginResponse.access).toBeString();
     expect(loginResponse.refresh).toBeString();
+    expect(meResponse.status).toBe(200);
   });
 
   it('already registered email shouldn\'t have to register', async () => {
