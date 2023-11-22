@@ -16,8 +16,15 @@ export const authRoutes = new Elysia()
   })
   .post(
     "/register",
-    async ({ body, db }) => {
+    async ({ body,set, db }) => {
       const request = body as RegisterUserRequest;
+      const userExists = await db.select({
+        email: schema.users.email
+      }).from(schema.users).where(eq(schema.users.email, request.email)).limit(1);
+      if(userExists.length > 0) {
+        set.status = 400;
+        return { message: `user with ${userExists[0].email} already exists` };
+      }
       const passwordHash = await Bun.password.hash(request.password);
       const savedUsers = await db
         .insert(schema.users)
@@ -44,12 +51,16 @@ export const authRoutes = new Elysia()
     "/login",
     async ({ body: request, db, set, jwt, params }) => {
       const req = request as LoginRequest;
-      const selectResults = await db
+      const usersFound = await db
         .select()
         .from(schema.users)
         .where(eq(schema.users.email, req.email))
         .limit(1);
-      const user = selectResults[0];
+      if(usersFound.length === 0) {
+        set.status = 401;
+        return { message: "user not found" };
+      }
+      const user = usersFound[0];
       const isValidPassword = await Bun.password.verify(
         req.password,
         user.passwordHash
