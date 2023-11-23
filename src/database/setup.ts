@@ -7,4 +7,4 @@ if (process.env.NODE_ENV === "test") {
   database = memoryDb;
 }
 
-export const setup = new Elysia().decorate("db", database);
+export const setupDb = new Elysia().decorate("db", database);

@@ -1,5 +1,12 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
+export interface User {
+  userId: number;
+  email: string;
+  passwordHash: string;
+  lastAccess: string;
+}
+
 export const users = sqliteTable("users", {
   userId: integer("user_id").primaryKey(),
   email: text("email").notNull().unique(),

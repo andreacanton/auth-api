@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "start": "NODE_ENV=development && bun --watch run src/index.ts",
+    "dev": "bun start",
     "testwatch": "NODE_ENV=test && bun test --watch",
     "migration:generate": "drizzle-kit generate:sqlite",
     "db:migrate": "bun run src/migrate.ts",
     "db:seeds": "bun run src/seeds.ts"
   },
   "dependencies": {
+    "@elysiajs/bearer": "^0.7.0",
     "date-fns": "^2.30.0",
     "drizzle-orm": "^0.28.6",
     "elysia": "^0.7.29",
